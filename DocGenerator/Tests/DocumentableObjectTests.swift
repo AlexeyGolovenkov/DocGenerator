@@ -8,7 +8,9 @@
 
 import XCTest
 
-class Tests: XCTestCase {
+@testable import DocGenerator
+
+class DocumentableObjectTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -20,9 +22,17 @@ class Tests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testJson() {
+        let object = DocumentableObject.init()
+		object.briefDescription = "Brief description"
+		object.name = "Testable object"
+		
+		let data = object.jsonDescription()
+		
+		XCTAssertNotNil(data, "JSON should NOT be nil")
+		XCTAssertTrue(data.count == 2, "JSON contains \(data.count) objects instead of 2")
+		XCTAssertTrue((data["name"] as! String) == "Brief description", "Wrong value of name field: \(data["name"])")
+		XCTAssertTrue((data["brief"] as! String) == "Testable object", "Wrong value of brief field: \(data["brief"])")
     }
     
     func testPerformanceExample() {

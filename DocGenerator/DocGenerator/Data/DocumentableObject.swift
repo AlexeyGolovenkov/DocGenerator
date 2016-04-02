@@ -8,8 +8,41 @@
 
 import Cocoa
 
+/**
+Possible types of the object
+*/
+enum DocumentableObjectType {
+	case Class
+	case Protocol
+	case Method
+	case Enum
+	// TODO: Add new types
+	
+	func title () -> String {
+		switch self {
+		case .Class:
+			return "Class"
+		case .Protocol:
+			return "Protocol"
+		case .Method:
+			return "Method"
+		case .Enum:
+			return "Enum"
+		}
+	}
+}
+
 /// Object that can be documented - class, method, enum etc.
 class DocumentableObject: NSObject {
+	
+		/// Title of the object
+	var name: String?
+	
+		/// Type of the object
+	var type: DocumentableObjectType?
+	
+		/// Short decription of the object
+	var briefDescription: String?
 	
 	/**
 	Description of the object that can be sent to HTML generator
@@ -17,6 +50,20 @@ class DocumentableObject: NSObject {
 	- returns: Dictionary with all significant values
 	*/
 	func jsonDescription() -> [String: AnyObject] {
-		return [:]
+		var json : [String: AnyObject] = [:]
+		
+		if self.name != nil {
+			json[generatorTagName] = self.name!
+		}
+		
+		if self.briefDescription != nil {
+			json[generatorTagBrief] = self.briefDescription!;
+		}
+		
+		if self.type != nil {
+			json[generatorTagType] = self.type!.title()
+		}
+		
+		return json
 	}
 }

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-/// Handles settings of the application.
+/// Handles settings of the application. The settings may come from command line, config files or be hardcoded
 class SettingsManager: NSObject {
 
 	
