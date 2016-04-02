@@ -13,9 +13,10 @@ Possible types of the object
 */
 enum DocumentableObjectType {
 	case Class
-	case Protocol
-	case Method
 	case Enum
+	case Method
+	case MethodParameter
+	case Protocol
 	// TODO: Add new types
 	
 	func title () -> String {
@@ -28,6 +29,8 @@ enum DocumentableObjectType {
 			return "Method"
 		case .Enum:
 			return "Enum"
+		case .MethodParameter:
+			return "Parameter"
 		}
 	}
 }
@@ -43,6 +46,21 @@ class DocumentableObject: NSObject {
 	
 		/// Short decription of the object
 	var briefDescription: String?
+	
+	// - MARK: Initialization
+	
+	override init() {
+		super.init()
+	}
+	
+	init(name: String, brief: String? = nil) {
+		super.init()
+		self.name = name
+		self.briefDescription = brief
+	}
+	
+	
+	// - MARK: Public methods
 	
 	/**
 	Description of the object that can be sent to HTML generator
