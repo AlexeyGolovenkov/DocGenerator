@@ -31,15 +31,8 @@ class DocumentableObjectTests: XCTestCase {
 		
 		XCTAssertNotNil(data, "JSON should NOT be nil")
 		XCTAssertTrue(data.count == 2, "JSON contains \(data.count) objects instead of 2")
-		XCTAssertTrue((data["name"] as! String) == "Brief description", "Wrong value of name field: \(data["name"])")
-		XCTAssertTrue((data["brief"] as! String) == "Testable object", "Wrong value of brief field: \(data["brief"])")
+		XCTAssertTrue((data["brief"] as! String) == "Brief description", "Wrong value of name field: \(data["name"])")
+		XCTAssertTrue((data["name"] as! String) == "Testable object", "Wrong value of brief field: \(data["brief"])")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+	
 }
